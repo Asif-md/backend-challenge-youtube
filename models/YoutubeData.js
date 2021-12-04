@@ -3,12 +3,11 @@ const mongoose = require('mongoose');
 const YoutubeSchema = new mongoose.Schema({
   kind: String,
   etag: String,
-  parent_id: { kind: String, videoId: String },
+  title: String,
+  description: String,
   snippet: {
     publishedAt: String,
     channelId: String,
-    title: String,
-    description: String,
     thumbnails: {
       default: {
         url: String,
@@ -25,10 +24,10 @@ const YoutubeSchema = new mongoose.Schema({
         width: Number,
         height: Number,
       },
-      channelTitle: String,
-      liveBroadcastContent: String,
-      publishTime: String,
     },
+    channelTitle: String,
+    liveBroadcastContent: String,
+    publishTime: String,
   },
 });
 

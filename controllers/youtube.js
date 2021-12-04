@@ -1,5 +1,5 @@
 const YOUTUBEService = require(`../services/YOUTUBEService`);
-const YoutubeModel = require('../models/YoutubeData');
+const Youtube_Data = require('../models/YoutubeData');
 
 module.exports = {
   getVideos: async (req, res) => {
@@ -9,8 +9,10 @@ module.exports = {
         const filterItems = obj && obj.items;
 
         for (let i = 0; i < filterItems.length; i++) {
-          const element = filterItems[i];
-          const insertData = new YoutubeModel(element);
+          let element = filterItems[i];
+          element['title'] = element.snippet.title;
+          element['description'] = element.snippet.description;
+          const insertData = new Youtube_Data(element);
           try {
             await insertData.save();
           } catch (error) {
@@ -31,10 +33,25 @@ module.exports = {
     const results = {};
 
     try {
-      results.results = await YoutubeModel.find({}).sort({ publishedAt: -1 }).limit(limit).skip(skipIndex).exec();
+      results.results = await Youtube_Data.find({}).sort({ publishedAt: -1 }).limit(limit).skip(skipIndex).exec();
       res.send(results);
     } catch (error) {
       res.status(500).send(error);
+    }
+  },
+  searchFromDB: async (req, res) => {
+    console.log(req);
+    const { name } = req.params;
+    let regex = new RegExp(name, 'i');
+
+    try {
+      await Youtube_Data.find()
+        .or([{ title: regex }, { description: regex }])
+        .exec((err, results) => {
+          return res.status(200).json(results);
+        });
+    } catch (err) {
+      return res.status(err.code).json({ error: err.error });
     }
   },
 };

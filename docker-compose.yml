@@ -1,0 +1,21 @@
+-------------------------
+# Service name
+youtube:  
+# build in the current directory
+  build: .
+  # command to run the app
+  command: npm start
+  # Maps port 8000 inside docker container to port 8000 outside docker container
+  ports:
+  - "8000:8000"
+  # linking the youtube to mongodb container
+  links:
+  - mongodb
+  # env variables
+  environment:
+    - NODE_ENV=production
+    - MONGODB_ADDRESS=mongodb
+# mongodb service
+mongodb:  
+  # pulling mongodb image
+  image: mongo

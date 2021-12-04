@@ -1,0 +1,43 @@
+# Service - The service acts as the load balancer. A load balancer is used 
+# to distribute requests to the various available servers.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-youtube-service
+spec:
+  selector:
+    app: rest-youtube-app
+  ports:
+  - protocol: "TCP"
+    port: 3000
+    targetPort: 8000
+  type: LoadBalancer
+
+# Deployment will act as the intended application. 
+# The user request hits the load balancer, then the 
+# load balancer distributes the request by creating the 
+# number of replicas defined in the deployment.yaml file. 
+# For example, in our case, we have five replicas for scalability, 
+# meaning that we will have 5 instances running at a time.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-youtube-app
+spec:
+  selector:
+    matchLabels:
+      app: rest-youtube-app
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: rest-youtube-app
+    spec:
+      containers:
+      - name: rest-youtube-app
+        image: mohammedasif/rest-youtube-app
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000

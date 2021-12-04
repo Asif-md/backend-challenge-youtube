@@ -9,7 +9,6 @@ module.exports = {
       'content-type': 'application/json',
     };
     return new Promise(async (resolve, reject) => {
-      //   let URL = `${BASE_URL}search/${type}/?query=${searchQuery}&api_key=${API_KEY}`;
       let URL = `${BASE_URL}search?key=${API_KEY}&type=video&part=snippet&maxResults=10&q=`;
 
       await request.get(

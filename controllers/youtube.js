@@ -1,19 +1,16 @@
 const YOUTUBEService = require(`../services/YOUTUBEService`);
 const YoutubeModel = require('../models/YoutubeData');
 
-let newData;
 module.exports = {
   getVideos: async (req, res) => {
     await YOUTUBEService.getVideos()
       .then(async (data) => {
         const obj = JSON.parse(data);
-        console.log('data', data);
-        const arr = obj && obj.items;
+        const filterItems = obj && obj.items;
 
-        for (let i = 0; i < arr.length; i++) {
-          const element = arr[i];
+        for (let i = 0; i < filterItems.length; i++) {
+          const element = filterItems[i];
           const insertData = new YoutubeModel(element);
-          console.log('inserted', insertData);
           try {
             await insertData.save();
           } catch (error) {
@@ -24,7 +21,7 @@ module.exports = {
         await res.status(200).send(obj);
       })
       .catch((err) => {
-        res.send(err.message);
+        console.log(err.message);
       });
   },
   getDataFromDB: async (req, res) => {

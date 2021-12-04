@@ -5,6 +5,8 @@ const cors = require('cors');
 require('dotenv').config();
 const port = process.env.SERVER_PORT || 4000;
 const routes = require('./routes/index');
+const FetchYoutubeData = require(`./controllers/youtube`);
+
 const app = express();
 
 const username = 'mohammedasif';
@@ -30,6 +32,9 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cors());
 // Starting points for the routes
 app.use('/api/', routes);
+
+// this function runs in every 10 seconds to get the videos from the youtube service
+// setInterval(() => FetchYoutubeData.getVideos(), 10000);
 
 app.listen(port, () => {
   console.info(`Server started on port ${port}`);

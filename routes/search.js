@@ -8,4 +8,6 @@ router.get('/', searchCtrl.getVideos);
 
 router.get('/data', searchCtrl.getDataFromDB);
 
+router.get('/search/:name', searchCtrl.searchFromDB);
+
 // router.get("/data/")

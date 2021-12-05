@@ -1,3 +1,18 @@
+# Welcome to the Project
+
+Here are the steps to run the application locally.
+
+1. clone the repo and get into project directory
+2. run command --> npm install <-- to install all the project dependencies
+3. run command --> npm start <-- to run the application
+4. Application will start running at localhost:4000
+
+# These are the steps to test the API's
+
+1. localhost:4000/api/videos : this API call the Youtube Data API v3 to fetch the data and stores it in DB
+2. localhost:4000/api/videos/data?page=1&limit=5 : this API returns the stored data from the DB in a descending order with certain queries like pagination and limit to show the data per page
+3. localhost:4000/api/videos/search/params : this is the last API which takes care of search with multiple fields like title and description. I implemented with regex to make it more reliable and optimized. type any letter which are in title or description. it will give you the result.
+
 # Dockerizing the Express application
 
 Below are the steps to dockerize the application and deploying to Kubernetes cluster

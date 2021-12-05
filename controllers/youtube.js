@@ -12,6 +12,7 @@ module.exports = {
           let element = filterItems[i];
           element['title'] = element.snippet.title;
           element['description'] = element.snippet.description;
+          element['publishedAt'] = element.snippet.publishedAt;
           const insertData = new Youtube_Data(element);
           try {
             await insertData.save();
@@ -20,7 +21,11 @@ module.exports = {
           }
         }
 
-        await res.status(200).send(obj);
+        if (res === null) {
+          console.log('Data inserted to DB from setInterval function.');
+        } else {
+          await res.status(200).send(obj);
+        }
       })
       .catch((err) => {
         console.log(err.message);

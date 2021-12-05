@@ -3,7 +3,7 @@
 Implemented the project on Node, Express,and MongoDB platform.
 
 Initially I thought of using the tech stack Python(Flask) with MySQL but due to some glitches in my laptop I couldn't. I used the Node, Express and MongoDB.
-This project is scalable and implemented the services with the microservices architecture. 
+This project is scalable and implemented the services with the microservices architecture.
 
 Here are the steps to run the application locally.
 
@@ -11,6 +11,8 @@ Here are the steps to run the application locally.
 2. run command --> npm install <-- to install all the project dependencies
 3. run command --> npm start <-- to run the application
 4. Application will start running at localhost:4000
+
+API KEYS : - Created the project on google developers console. basically created two projects there and inserted two API keys. if the current API doesn't work. please use the commented one in services file.
 
 # These are the steps to test the API's
 

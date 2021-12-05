@@ -2,6 +2,8 @@ const YOUTUBEService = require(`../services/YOUTUBEService`);
 const YoutubeData = require('../models/YoutubeModel');
 
 module.exports = {
+  // this function call the youtube service API and return the result
+  // At the same time saves the data into DB
   getVideos: async (req, res) => {
     await YOUTUBEService.getVideos()
       .then(async (data) => {
@@ -31,6 +33,9 @@ module.exports = {
         console.log(err.message);
       });
   },
+
+  // the role of this function is to make the get API call based on queries
+  // like Paginaton, Limit and also gives the result in descending order
   getDataFromDB: async (req, res) => {
     const page = parseInt(req.query.page);
     const limit = parseInt(req.query.limit);
@@ -44,6 +49,10 @@ module.exports = {
       res.status(500).send(error);
     }
   },
+
+  // this is the last API function and takes care of search
+  // with multiple fields like title and description.
+  // I implemented with regex to make it more reliable and optimized
   searchFromDB: async (req, res) => {
     const { name } = req.params;
     let regex = new RegExp(name, 'i');

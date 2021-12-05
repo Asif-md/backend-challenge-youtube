@@ -14,6 +14,7 @@ const password = 'asif123';
 const cluster = 'cluster0.6roxi';
 const dbname = 'youtubedb';
 
+// established mongoDB connection with mongoDB Cluster
 mongoose.connect(`mongodb+srv://${username}:${password}@${cluster}.mongodb.net/${dbname}?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   // useFindAndModify: false,
@@ -36,10 +37,10 @@ app.use(cors());
 app.use('/api/', routes);
 
 // this function runs in every 10 seconds to get the videos from the youtube service
-// setInterval(() => {
-//   console.log('Calling API every 10 seconds');
-//   FetchYoutubeData.getVideos(undefined, null);
-// }, 10000);
+setInterval(() => {
+  console.log('Calling API every 10 seconds');
+  FetchYoutubeData.getVideos(undefined, null);
+}, 10000);
 
 app.listen(port, () => {
   console.info(`Server started on port ${port}`);

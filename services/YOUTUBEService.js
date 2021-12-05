@@ -10,6 +10,8 @@ module.exports = {
       'content-type': 'application/json',
     };
 
+    // Implemented the API call with promises
+    // for handling asynchronous operations in the simplest manner
     return new Promise(async (resolve, reject) => {
       let URL = `${BASE_URL}search?key=${API_KEY}&type=video&part=snippet&maxResults=10&q=`;
 

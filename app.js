@@ -34,7 +34,10 @@ app.use(cors());
 app.use('/api/', routes);
 
 // this function runs in every 10 seconds to get the videos from the youtube service
-// setInterval(() => FetchYoutubeData.getVideos(), 10000);
+setInterval(() => {
+  console.log('Calling API every 10 seconds');
+  FetchYoutubeData.getVideos(undefined, null);
+}, 10000);
 
 app.listen(port, () => {
   console.info(`Server started on port ${port}`);

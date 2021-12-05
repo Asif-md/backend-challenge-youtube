@@ -5,8 +5,8 @@ const YoutubeSchema = new mongoose.Schema({
   etag: String,
   title: String,
   description: String,
+  publishedAt: String,
   snippet: {
-    publishedAt: String,
     channelId: String,
     thumbnails: {
       default: {

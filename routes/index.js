@@ -1,7 +1,7 @@
 const express = require('express');
-const searchRoutes = require('./search');
+const youtubeRoutes = require('./youtubeRoutes');
 const router = express.Router();
 
-router.use('/videos', searchRoutes);
+router.use('/videos', youtubeRoutes);
 
 module.exports = router;
